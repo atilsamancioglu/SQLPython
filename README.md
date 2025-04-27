@@ -16,12 +16,7 @@ python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
 
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-3. Run the main script:
+2Run the main script:
 ```bash
 python sql_basics.py
 ```
