@@ -97,9 +97,15 @@ def insert_sample_data(cursor):
 
 def demonstrate_queries(cursor):
     """Demonstrate various SQL queries."""
-    print("\n=== Basic SELECT Query ===")
+    print("\n=== SELECT ALL STUDENTS ===")
     cursor.execute("SELECT * FROM Students")
     print("All Students:")
+    for row in cursor.fetchall():
+        print(row)
+
+    print("\n=== SELECT ALL DEPARTMENTS ===")
+    cursor.execute("SELECT * FROM Departments")
+    print("All Departments:")
     for row in cursor.fetchall():
         print(row)
 
