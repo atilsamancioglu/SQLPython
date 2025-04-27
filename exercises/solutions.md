@@ -2,10 +2,10 @@
 
 ## Exercise 1: Basic SELECT
 
-1. Select all students who enrolled in 2023:
+1. Select all students who enrolled in 2028:
 ```sql
 SELECT * FROM Students 
-WHERE enrollment_date LIKE '2023%';
+WHERE enrollment_date LIKE '2028%';
 ```
 
 2. Select all courses with more than 3 credits:
@@ -37,22 +37,6 @@ SELECT d.department_name, c.course_name
 FROM Departments d
 JOIN Courses c ON d.department_id = c.department_id
 ORDER BY d.department_name;
-```
-
-3. Find the average grade for each student:
-```sql
-SELECT s.first_name, s.last_name, 
-       AVG(CASE 
-           WHEN g.grade = 'A' THEN 4.0
-           WHEN g.grade = 'A-' THEN 3.7
-           WHEN g.grade = 'B+' THEN 3.3
-           WHEN g.grade = 'B' THEN 3.0
-           WHEN g.grade = 'B-' THEN 2.7
-           ELSE 0
-       END) as average_grade
-FROM Students s
-JOIN Grades g ON s.student_id = g.student_id
-GROUP BY s.student_id, s.first_name, s.last_name;
 ```
 
 ## Exercise 3: GROUP BY and Aggregations

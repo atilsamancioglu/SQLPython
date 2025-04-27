@@ -2,7 +2,7 @@
 
 ## Exercise 1: Basic SELECT
 Write a query to:
-1. Select all students who enrolled in 2023
+1. Select all students who enrolled in 2028
 2. Select all courses with more than 3 credits
 3. Select all students in the Computer Science department
 
@@ -10,7 +10,6 @@ Write a query to:
 Write queries to:
 1. Find all students and their grades
 2. Find all courses offered by each department
-3. Find the average grade for each student
 
 ## Exercise 3: GROUP BY and Aggregations
 Write queries to:

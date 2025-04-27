@@ -29,13 +29,13 @@ def print_results(results, title):
 
 def exercise_1_solutions(conn):
     """Solutions for Exercise 1: Basic SELECT"""
-    # 1. Select all students who enrolled in 2023
+    # 1. Select all students who enrolled in 2028
     query = """
     SELECT * FROM Students 
-    WHERE enrollment_date LIKE '2023%'
+    WHERE enrollment_date LIKE '2028%'
     """
     results = execute_query(conn, query)
-    print_results(results, "Students enrolled in 2023")
+    print_results(results, "Students enrolled in 2028")
 
     # 2. Select all courses with more than 3 credits
     query = """
@@ -75,24 +75,6 @@ def exercise_2_solutions(conn):
     """
     results = execute_query(conn, query)
     print_results(results, "Courses by Department")
-
-    # 3. Find the average grade for each student
-    query = """
-    SELECT s.first_name, s.last_name, 
-           AVG(CASE 
-               WHEN g.grade = 'A' THEN 4.0
-               WHEN g.grade = 'A-' THEN 3.7
-               WHEN g.grade = 'B+' THEN 3.3
-               WHEN g.grade = 'B' THEN 3.0
-               WHEN g.grade = 'B-' THEN 2.7
-               ELSE 0
-           END) as average_grade
-    FROM Students s
-    JOIN Grades g ON s.student_id = g.student_id
-    GROUP BY s.student_id, s.first_name, s.last_name
-    """
-    results = execute_query(conn, query)
-    print_results(results, "Average Grades per Student")
 
 def exercise_3_solutions(conn):
     """Solutions for Exercise 3: GROUP BY and Aggregations"""

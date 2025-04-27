@@ -14,19 +14,7 @@ def create_database():
 
 def create_tables(cursor):
     """Create necessary tables for the university database."""
-    # Create Students table
-    cursor.execute('''
-    CREATE TABLE Students (
-        student_id INTEGER PRIMARY KEY,
-        first_name TEXT NOT NULL,
-        last_name TEXT NOT NULL,
-        email TEXT UNIQUE,
-        department_id INTEGER,
-        enrollment_date TEXT
-    )
-    ''')
-
-    # Create Departments table
+    # Create Departments table first (no foreign keys)
     cursor.execute('''
     CREATE TABLE Departments (
         department_id INTEGER PRIMARY KEY,
@@ -35,7 +23,20 @@ def create_tables(cursor):
     )
     ''')
 
-    # Create Courses table
+    # Create Students table (references Departments)
+    cursor.execute('''
+    CREATE TABLE Students (
+        student_id INTEGER PRIMARY KEY,
+        first_name TEXT NOT NULL,
+        last_name TEXT NOT NULL,
+        email TEXT UNIQUE,
+        department_id INTEGER,
+        enrollment_date TEXT,
+        FOREIGN KEY (department_id) REFERENCES Departments(department_id)
+    )
+    ''')
+
+    # Create Courses table (references Departments)
     cursor.execute('''
     CREATE TABLE Courses (
         course_id INTEGER PRIMARY KEY,
@@ -46,7 +47,7 @@ def create_tables(cursor):
     )
     ''')
 
-    # Create Grades table
+    # Create Grades table last (references both Students and Courses)
     cursor.execute('''
     CREATE TABLE Grades (
         grade_id INTEGER PRIMARY KEY,
@@ -71,9 +72,9 @@ def insert_sample_data(cursor):
 
     # Insert students
     students = [
-        (1, 'John', 'Doe', 'john.doe@university.edu', 1, '2023-09-01'),
-        (2, 'Jane', 'Smith', 'jane.smith@university.edu', 2, '2023-09-01'),
-        (3, 'Bob', 'Johnson', 'bob.johnson@university.edu', 1, '2023-09-01')
+        (1, 'John', 'Doe', 'john.doe@university.edu', 1, '2028-09-01'),
+        (2, 'Jane', 'Smith', 'jane.smith@university.edu', 2, '2028-09-01'),
+        (3, 'Bob', 'Johnson', 'bob.johnson@university.edu', 1, '2028-09-01')
     ]
     cursor.executemany('INSERT INTO Students VALUES (?, ?, ?, ?, ?, ?)', students)
 
@@ -88,10 +89,10 @@ def insert_sample_data(cursor):
 
     # Insert grades
     grades = [
-        (1, 1, 1, 'A', 'Fall 2023'),
-        (2, 1, 2, 'B+', 'Fall 2023'),
-        (3, 2, 3, 'A-', 'Fall 2023'),
-        (4, 3, 1, 'B', 'Fall 2023')
+        (1, 1, 1, 'A', 'Fall 2028'),
+        (2, 1, 2, 'B+', 'Fall 2028'),
+        (3, 2, 3, 'A-', 'Fall 2028'),
+        (4, 3, 1, 'B', 'Fall 2028')
     ]
     cursor.executemany('INSERT INTO Grades VALUES (?, ?, ?, ?, ?)', grades)
 
